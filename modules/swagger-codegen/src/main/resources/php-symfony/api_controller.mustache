@@ -150,15 +150,14 @@ class {{controllerName}} extends Controller
 
         try {
             $handler = $this->getApiHandler();
-
+            $responseHeaders = [];
             {{#authMethods}}
             // Set authentication method '{{name}}'
-            $handler->set{{name}}($security{{name}});
+            $handler->set{{name}}($security{{name}}, $responseHeaders, $request);
             {{/authMethods}}
             
             // Make the call to the business logic
             $responseCode = {{#returnType}}200{{/returnType}}{{^returnType}}204{{/returnType}};
-            $responseHeaders = [];
             $result = $handler->{{operationId}}({{#allParams}}${{paramName}}, {{/allParams}}$responseCode, $responseHeaders);
 
             // Find default response message

@@ -19,6 +19,7 @@
 namespace {{apiPackage}};
 
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\HttpFoundation\Request;
 {{#operations}}{{#imports}}use {{import}};
 {{/imports}}
 
@@ -37,11 +38,12 @@ interface {{classname}}
     /**
      * Sets authentication method {{name}}
      *
-     * @param string $value Value of the {{name}} authentication method.
-     *
+     * @param string  $value Value of the {{name}} authentication method.
+     * @param array   $responseHeaders  Additional HTTP headers to return with the response ()
+     * @param Request $request
      * @return void
      */
-    public function set{{name}}($value);
+    public function set{{name}}($value,  array &$responseHeaders, Request $request);
     {{/authMethods}}
     {{#operation}}
 
