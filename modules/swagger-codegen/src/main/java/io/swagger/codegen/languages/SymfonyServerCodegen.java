@@ -364,7 +364,9 @@ public class SymfonyServerCodegen extends AbstractPhpCodegen implements CodegenC
             if (op.returnType != null) {
                 op.vendorExtensions.put("x-commentType", op.returnType);
                 if (!op.returnTypeIsPrimitive) {
-                    op.vendorExtensions.put("x-commentType", op.returnType+"[]");
+                    if("array".equals(op.returnContainer)) {
+                        op.vendorExtensions.put("x-commentType", op.returnType + "[]");
+                    }
                 }
             } else {
                 op.vendorExtensions.put("x-commentType", "void");
