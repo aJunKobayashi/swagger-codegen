@@ -173,7 +173,7 @@ class {{controllerName}} extends Controller
             }
 
             return new Response(
-                $result?$this->serialize($result, $responseFormat):'',
+                null !== $result?$this->serialize($result, $responseFormat):'{}',
                 $responseCode,
                 array_merge(
                     $responseHeaders,
