@@ -85,4 +85,10 @@
         if ($response instanceof Response) {
             return $response;
         }
+    {{#isDate}}
+        ${{paramName}} = new DateTime(${{paramName}});
+    {{/isDate}}
+    {{#isDateTime}}
+        ${{paramName}} = new DateTime(${{paramName}});
+    {{/isDateTime}}
 {{/allParams}}
