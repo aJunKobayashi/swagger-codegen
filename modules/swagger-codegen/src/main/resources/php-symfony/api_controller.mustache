@@ -70,11 +70,7 @@ class {{controllerName}} extends Controller
         // Figure out what data format to return to the client
         $produces = [{{#produces}}'{{{mediaType}}}'{{#hasMore}}, {{/hasMore}}{{/produces}}];
         // Figure out what the client accepts
-        $clientAccepts = $request->headers->has('Accept')?$request->headers->get('Accept'):'*/*';
-        $responseFormat = $this->getOutputFormat($clientAccepts, $produces);
-        if ($responseFormat === null) {
-            return new Response('', 406);
-        }
+        $responseFormat = count($produces) > 0 ? $produces[0] : 'application/json';
 
         // Handle authentication
         {{#authMethods}}
