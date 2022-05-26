@@ -169,8 +169,15 @@ class {{controllerName}} extends Controller
             {{/responses}}
             }
 
+            $content = '';
+            if ('application/json' === $responseFormat) {
+                $content = null !== $result ? $this->serialize($result, $responseFormat) : '{}';
+            } else {
+                $content = $result ? $result : '';
+            }
+
             return new Response(
-                null !== $result?$this->serialize($result, $responseFormat):'{}',
+                $content,
                 $responseCode,
                 array_merge(
                     $responseHeaders,
