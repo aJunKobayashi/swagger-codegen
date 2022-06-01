@@ -32,11 +32,11 @@
 {{/isContainer}}
 {{^isContainer}}
     {{#isDate}}
-     * @Assert\Date()
+     * @Assert\Type("\DateTime")
      * @Type("DateTime")
     {{/isDate}}
     {{#isDateTime}}
-     * @Assert\DateTime()
+     * @Assert\Type("\DateTime")
      * @Type("DateTime")
     {{/isDateTime}}
     {{^isDate}}
