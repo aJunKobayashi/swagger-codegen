@@ -86,9 +86,13 @@
             return $response;
         }
     {{#isDate}}
-        ${{paramName}} = new DateTime(${{paramName}});
+        if (${{paramName}} !== null) {
+            ${{paramName}} = new DateTime(${{paramName}});
+        }
     {{/isDate}}
     {{#isDateTime}}
-        ${{paramName}} = new DateTime(${{paramName}});
+        if (${{paramName}} !== null) {
+            ${{paramName}} = new DateTime(${{paramName}});
+        }
     {{/isDateTime}}
 {{/allParams}}
