@@ -147,7 +147,7 @@ class {{controllerName}} extends Controller
 {{>api_input_validation}}
         } catch (Exception $fallthrough) {
             $msg = $fallthrough->getMessage();
-            $e = new Exception($msg, 500);
+            $e = new Exception($msg, 400);
             return $this->createErrorResponse(new HttpException(500, 'An unsuspected error occurred.', $e));
         }
 
