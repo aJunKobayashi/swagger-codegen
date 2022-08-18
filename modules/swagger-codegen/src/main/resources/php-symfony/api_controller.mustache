@@ -144,7 +144,7 @@ class {{controllerName}} extends Controller
             {{/allParams}}
 
         // Validate the input values
-    {{>api_input_validation}}
+{{>api_input_validation}}
         } catch (Exception $fallthrough) {
             $msg = $fallthrough->getMessage();
             $e = new Exception($msg, 500);
