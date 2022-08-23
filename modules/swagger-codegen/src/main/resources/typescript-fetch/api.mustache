@@ -106,7 +106,7 @@ export const {{classname}}FetchParamCreator = function (configuration?: Configur
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
     {{#hasFormParams}}
-            const localVarFormParams = new url.URLSearchParams();
+            const localVarFormParams = new FormData();
     {{/hasFormParams}}
 
     {{#authMethods}}
@@ -198,19 +198,19 @@ export const {{classname}}FetchParamCreator = function (configuration?: Configur
                 })
             {{/isCollectionFormatMulti}}
             {{^isCollectionFormatMulti}}
-                    localVarFormParams.set('{{baseName}}', {{paramName}}.join(COLLECTION_FORMATS["{{collectionFormat}}"]));
+                    localVarFormParams.append('{{baseName}}', {{paramName}}.join(COLLECTION_FORMATS["{{collectionFormat}}"]));
             {{/isCollectionFormatMulti}}
             }
             {{/isListContainer}}
             {{^isListContainer}}
             if ({{paramName}} !== undefined) {
-                localVarFormParams.set('{{baseName}}', {{paramName}} as any);
+                localVarFormParams.append('{{baseName}}', {{paramName}} as any);
             }
             {{/isListContainer}}
 
     {{/formParams}}
     {{#hasFormParams}}
-            localVarHeaderParameter['Content-Type'] = 'application/x-www-form-urlencoded';
+            // localVarHeaderParameter['Content-Type'] = 'application/x-www-form-urlencoded';
 
     {{/hasFormParams}}
     {{#bodyParam}}
@@ -227,7 +227,7 @@ export const {{classname}}FetchParamCreator = function (configuration?: Configur
             delete localVarUrlObj.search;
             localVarRequestOptions.headers = Object.assign({}, localVarHeaderParameter, options.headers);
     {{#hasFormParams}}
-            localVarRequestOptions.body = localVarFormParams.toString();
+            localVarRequestOptions.body = localVarFormParams;
     {{/hasFormParams}}
     {{#bodyParam}}
             const needsSerialization = (<any>"{{dataType}}" !== "string") || localVarRequestOptions.headers['Content-Type'] === 'application/json';
