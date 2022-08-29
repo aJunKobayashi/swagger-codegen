@@ -160,7 +160,7 @@ class {{controllerName}} extends Controller
             {{/authMethods}}
             
             // Make the call to the business logic
-            $responseCode = {{#returnType}}200{{/returnType}}{{^returnType}}204{{/returnType}};
+            $responseCode = {{#returnType}}200{{/returnType}}{{^returnType}}200{{/returnType}};
             $result = $handler->{{operationId}}({{#allParams}}${{paramName}}, {{/allParams}}$responseCode, $responseHeaders);
 
             // Find default response message
