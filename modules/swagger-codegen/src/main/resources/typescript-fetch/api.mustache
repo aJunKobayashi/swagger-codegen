@@ -5,8 +5,10 @@
 import * as url from "url";
 // import * as portableFetch from "portable-fetch";
 import { Configuration } from "./configuration";
+import moment from "moment";
 
 const portableFetch=fetch;
+Date.prototype.toJSON = function(){return moment(this).format()};
 
 const BASE_PATH = "{{{basePath}}}".replace(/\/+$/, "");
 
