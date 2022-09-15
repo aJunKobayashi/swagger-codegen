@@ -164,13 +164,24 @@ export const {{classname}}FetchParamCreator = function (configuration?: Configur
             {{^isListContainer}}
             if ({{paramName}} !== undefined) {
                 {{#isDateTime}}
+                const offset = {{paramName}}.getTimezoneOffset();
+                {{paramName}}.setMinutes({{paramName}}.getMinutes() - offset);
                 localVarQueryParameter['{{baseName}}'] = ({{paramName}} as any).toISOString().replace('T', ' ').substr(0, 19);
+                {{paramName}}.setMinutes({{paramName}}.getMinutes() + offset);
                 {{/isDateTime}}
                 {{^isDateTime}}
                 {{#isDate}}
+                if  ({{paramName}} as any instanceof Date) {
+                    const offset = ({{paramName}} as any).getTimezoneOffset();
+                    ({{paramName}} as any).setMinutes(({{paramName}} as any).getMinutes() - offset);
+                }
                 localVarQueryParameter['{{baseName}}'] = ({{paramName}} as any instanceof Date) ?
                     ({{paramName}} as any).toISOString().substr(0,10) :
                     {{paramName}};
+                if  ({{paramName}} as any instanceof Date) {
+                    const offset = ({{paramName}} as any).getTimezoneOffset();
+                    ({{paramName}} as any).setMinutes(({{paramName}} as any).getMinutes() + offset);
+                }
                 {{/isDate}}
                 {{^isDate}}
                 localVarQueryParameter['{{baseName}}'] = {{paramName}};
