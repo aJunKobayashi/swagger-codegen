@@ -19,6 +19,7 @@
 
 namespace {{controllerPackage}};
 
+use App\Util\LogUtil;
 use Datetime;
 use \Exception;
 use Symfony\Component\HttpFoundation\Request;
@@ -182,10 +183,7 @@ class {{controllerName}} extends Controller
                 $content = $result ? $result : '';
             }
 
-            if (array_key_exists("logger", $GLOBALS)) {
-                $logger = $GLOBALS["logger"];
-                $logger->info("statusCode: ${responseCode}");
-            }
+            LogUtil::info("statusCode: ${responseCode}");
 
             return new Response(
                 $content,
